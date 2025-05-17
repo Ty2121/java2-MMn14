@@ -29,7 +29,7 @@ public class Queue<T> {
         @Override
         public boolean equals(Object o) {
             if (o == null || getClass() != o.getClass()) return false;
-            Node<?> node = (Node<?>) o;
+            Node<T> node = (Node<T>) o;
             return Objects.equals(value, node.value);
         }
 
@@ -62,7 +62,7 @@ public class Queue<T> {
 
     public boolean contains(T obj){
         for(Node node : arr){
-            if(obj.equals(node)){
+            if(node.getValue().equals(obj)){
                 return true;
             }
         }
@@ -70,14 +70,11 @@ public class Queue<T> {
     }
 
     public boolean remove(T obj){
-        long order;
-        int priority;
-        int index;
-
+        PriorityQueue copy = new PriorityQueue<>(arr);
         ArrayList<Node> l = new ArrayList<>(this.arr);
         l.sort(new Compare());
         for( Node n : l){
-            if (n.equals(obj)){
+            if (n.getValue().equals(obj)){
                 arr.remove(n);
                 return true;
             }
